@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, Download, Zap } from 'lucide-react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  portfolioData?: any;
+}
+
+const Hero: React.FC<HeroProps> = ({ portfolioData }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Use portfolio data if available, otherwise use defaults
+  const personalInfo = portfolioData?.personalInfo || {
+    name: 'John Doe',
+    title: 'Backend Developer',
+    subtitle: 'Crafting Digital Experiences with Passion & Precision'
+  };
   useEffect(() => {
     setIsLoaded(true);
     
@@ -66,17 +76,14 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-            <span className="block text-white mb-2">Creative</span>
+            <span className="block text-white mb-2">{personalInfo.title.split(' ')[0]}</span>
             <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
-              Developer
+              {personalInfo.title.split(' ')[1]}
             </span>
           </h1>
           
           <p className="text-xl sm:text-2xl text-gray-300 mb-6 font-light">
-            Crafting Digital Experiences with
-          </p>
-          <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-12">
-            Passion & Precision
+            {personalInfo.subtitle || 'Crafting Digital Experiences with Passion & Precision'}
           </p>
         </div>
 
@@ -89,18 +96,18 @@ const Hero: React.FC = () => {
               <span className="relative z-10">Explore My Work</span>
               <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
-            
-            <button className="group flex items-center space-x-2 px-8 py-4 border-2 border-purple-400/50 text-purple-300 font-semibold rounded-full hover:bg-purple-400/10 hover:border-purple-400 transition-all duration-300 hover:scale-105">
-              <Download className="h-5 w-5 group-hover:animate-bounce" />
-              <span>Download CV</span>
-            </button>
+
+            <a href="./ameer_cv.pdf" target='_blank' className="group flex items-center space-x-2 px-8 py-4 border-2 border-purple-400/50 text-purple-300 font-semibold rounded-full hover:bg-purple-400/10 hover:border-purple-400 transition-all duration-300 hover:scale-105">
+              <Download className="h-5 w-5 group-hover:animate-bounce"/>
+              <span >Download CV</span>
+            </a  >
           </div>
 
           <div className="flex items-center justify-center space-x-8 mb-16">
             {[
-              { icon: Github, href: '#', label: 'GitHub' },
-              { icon: Linkedin, href: '#', label: 'LinkedIn' },
-              { icon: Mail, href: '#', label: 'Email' }
+              { icon: Github, href: 'https://github.com/mero313', label: 'GitHub' },
+              { icon: Linkedin, href: 'https://www.linkedin.com/in/ameer-mazin-438753265/', label: 'LinkedIn' },
+              { icon: Mail, href: 'mailto:ameer_mazin2001@yahoo.com', label: 'Email' }
             ].map((social, index) => (
               <a 
                 key={index}

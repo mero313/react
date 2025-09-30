@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle } from 'lucide-react';
 
-const Contact: React.FC = () => {
+interface ContactProps {
+  portfolioData?: any;
+}
+
+const Contact: React.FC<ContactProps> = ({ portfolioData }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +15,16 @@ const Contact: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Use portfolio data if available, otherwise use defaults
+  const personalInfo = portfolioData?.personalInfo || {
+    email: 'ameer_mazin2001@yahoo.com',
+    phone: '9647711690829',
+    location: 'Baghdad , Aldora',
+    github: 'https://github.com/mero313',
+    linkedin: 'https://www.linkedin.com/in/ameer-mazin-438753265/',
+    twitter: 'https://x.com/MeRo_7x'
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,30 +73,30 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'hello@johndoe.dev',
-      link: 'mailto:hello@johndoe.dev',
+      value: personalInfo.email,
+      link: `mailto:${personalInfo.email}`,
       gradient: 'from-purple-500 to-pink-500'
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      value: personalInfo.phone,
+      link: `tel:${personalInfo.phone.replace(/\D/g, '')}`,
       gradient: 'from-cyan-500 to-blue-500'
     },
     {
       icon: MapPin,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: personalInfo.location,
       link: '#',
       gradient: 'from-green-500 to-emerald-500'
     }
   ];
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-purple-400' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-400' },
-    { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:text-cyan-400' },
+    { icon: Github, href: personalInfo.github, label: 'GitHub', color: 'hover:text-purple-400' },
+    { icon: Linkedin, href: personalInfo.linkedin, label: 'LinkedIn', color: 'hover:text-blue-400' },
+    { icon: Twitter, href: personalInfo.twitter, label: 'Twitter', color: 'hover:text-cyan-400' },
     { icon: MessageCircle, href: '#', label: 'Discord', color: 'hover:text-indigo-400' }
   ];
 

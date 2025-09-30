@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
               <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
             </div>
             <span className="font-black text-3xl bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-              DevMaster
+              Ameer Mazin
             </span>
           </div>
           

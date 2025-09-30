@@ -1,10 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Sparkles, Target, Rocket, Heart } from 'lucide-react';
 
-const About: React.FC = () => {
+interface AboutProps {
+  portfolioData?: any;
+}
+
+const About: React.FC<AboutProps> = ({ portfolioData }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Use portfolio data if available, otherwise use defaults
+  const personalInfo = portfolioData?.personalInfo || {
+    name: 'Amerr Mazin',
+    description: 'I’m Ameer Mazin, a passionate developer driven by a vision to turn complex ideas into meaningful digital solutions. My journey is fueled by curiosity, problem-solving, and a commitment to building systems that combine functionality with impact.'
+  };
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -64,8 +73,7 @@ const About: React.FC = () => {
           </h2>
           <div className="w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-8 rounded-full"></div>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            I'm a passionate developer who transforms ideas into stunning digital realities. 
-            With expertise in modern technologies and an eye for exceptional design.
+            {personalInfo.description}
           </p>
         </div>
 
@@ -76,7 +84,7 @@ const About: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl rotate-6 animate-pulse"></div>
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-3xl -rotate-6 animate-pulse animation-delay-1000"></div>
                 <div className="relative w-full h-full bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl flex items-center justify-center text-white text-6xl font-black shadow-2xl">
-                  <span className="animate-pulse">JD</span>
+                  <span className="animate-pulse" >AM</span>
                 </div>
               </div>
             </div>
@@ -85,22 +93,18 @@ const About: React.FC = () => {
           <div className={`space-y-8 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className="space-y-6">
               <p className="text-lg text-gray-300 leading-relaxed">
-                My journey began with curiosity and evolved into mastery. I specialize in creating 
-                seamless digital experiences that not only look stunning but perform flawlessly.
+                I believe in precision, creativity, and continuous growth. From brainstorming concepts to delivering complete solutions, I approach every challenge with determination and focus on creating value that lasts.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed">
-                From concept to deployment, I handle every aspect of development with precision 
-                and creativity. My goal is to bring your vision to life with code that's both 
-                beautiful and functional.
+                Beyond coding, I’m always exploring new knowledge, sharing experiences, and pushing myself to grow both as a professional and as a person. My goal is to leave a mark through work that empowers people and organizations to achieve more.
               </p>
               <p className="text-lg text-gray-300 leading-relaxed">
-                When I'm not coding, I'm exploring new technologies, contributing to open source, 
-                and sharing knowledge with the developer community.
+                👉 Above all, I aim to build a career that reflects both my passion for technology and my drive to make a real difference.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-4">
-              {['React', 'TypeScript', 'Node.js', 'Python', 'AWS'].map((tech, index) => (
+              {['.NET', 'Python', 'Node.js', 'FastApi', 'JavaScript'].map((tech, index) => (
                 <span 
                   key={index}
                   className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-purple-300 font-medium hover:scale-105 transition-transform duration-300"
